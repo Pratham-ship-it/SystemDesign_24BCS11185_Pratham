@@ -1,0 +1,111 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Netflix HLD" id="netflix-hld">
+    <mxGraphModel dx="1400" dy="937" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="950" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="client" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eeeeee;strokeColor=#36393d;" value="Client&#xa;(Web / Mobile App)" vertex="1">
+          <mxGeometry height="60" width="180" x="540" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="ratelimiter" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eeeeee;strokeColor=#36393d;" value="Rate Limiter&#xa;(Leaky Bucket)" vertex="1">
+          <mxGeometry height="60" width="180" x="540" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="lb" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eeeeee;strokeColor=#36393d;" value="Load Balancer&#xa;(Least Response Time)" vertex="1">
+          <mxGeometry height="60" width="180" x="540" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="servers" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eeeeee;strokeColor=#36393d;dashed=1;" value="App Servers (x3)" vertex="1">
+          <mxGeometry height="60" width="150" x="820" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="gateway" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eeeeee;strokeColor=#36393d;" value="API Gateway" vertex="1">
+          <mxGeometry height="60" width="180" x="540" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="auth" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eeeeee;strokeColor=#36393d;" value="Auth Service&#xa;(register / login / token validation)&#xa;Schema: id, username, email, password" vertex="1">
+          <mxGeometry height="100" width="220" x="40" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="subscription" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eeeeee;strokeColor=#36393d;" value="Subscription Service&#xa;(buy / refund / verify)&#xa;Schema: id, userId, tier, validTill" vertex="1">
+          <mxGeometry height="100" width="220" x="300" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="movie" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eeeeee;strokeColor=#36393d;" value="Video / Movie Service&#xa;(get / search / download)&#xa;Schema: id, title, description, poster, video" vertex="1">
+          <mxGeometry height="100" width="220" x="580" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="payment" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eeeeee;strokeColor=#36393d;" value="Payment Service&#xa;(init / confirm / error handling)&#xa;Integrates: External gateway (Paytm)" vertex="1">
+          <mxGeometry height="100" width="220" x="860" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="paytm" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eeeeee;strokeColor=#36393d;dashed=1;" value="External Payment Gateway&#xa;(e.g. Paytm)" vertex="1">
+          <mxGeometry height="60" width="200" x="1140" y="545" as="geometry" />
+        </mxCell>
+        <mxCell id="cache" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eeeeee;strokeColor=#36393d;" value="Cache&#xa;(frequently accessed data)" vertex="1">
+          <mxGeometry height="60" width="180" x="330" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="nosql" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#eeeeee;strokeColor=#36393d;" value="NoSQL DB&#xa;(user data - fast access)" vertex="1">
+          <mxGeometry height="80" width="160" x="40" y="780" as="geometry" />
+        </mxCell>
+        <mxCell id="sql" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#eeeeee;strokeColor=#36393d;" value="SQL DB&#xa;(transactions &amp; videos)" vertex="1">
+          <mxGeometry height="80" width="160" x="470" y="780" as="geometry" />
+        </mxCell>
+        <mxCell id="cdn" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eeeeee;strokeColor=#36393d;" value="CDN&#xa;(Push CDN, Anycast, Edge Servers,&#xa;3x replication)" vertex="1">
+          <mxGeometry height="80" width="220" x="700" y="780" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="client" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fillColor=#eeeeee;strokeColor=#36393d;" target="ratelimiter">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="ratelimiter" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fillColor=#eeeeee;strokeColor=#36393d;" target="lb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="lb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;fillColor=#eeeeee;strokeColor=#36393d;" target="servers">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="lb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fillColor=#eeeeee;strokeColor=#36393d;" target="gateway">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="gateway" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.15;exitY=1;entryX=0.5;entryY=0;fillColor=#eeeeee;strokeColor=#36393d;" target="auth" value="api/v1/auth">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="gateway" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.4;exitY=1;entryX=0.5;entryY=0;fillColor=#eeeeee;strokeColor=#36393d;" target="subscription" value="api/v1/subscription">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="gateway" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.6;exitY=1;entryX=0.5;entryY=0;fillColor=#eeeeee;strokeColor=#36393d;" target="movie" value="api/v1/movie">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="gateway" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.85;exitY=1;entryX=0.5;entryY=0;fillColor=#eeeeee;strokeColor=#36393d;" target="payment" value="api/v1/payment">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="auth" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.3;exitY=1;entryX=0.5;entryY=0;fillColor=#eeeeee;strokeColor=#36393d;" target="nosql">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="auth" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.85;exitY=1;entryX=0.1;entryY=0;fillColor=#eeeeee;strokeColor=#36393d;" target="cache">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="subscription" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.5;exitY=1;entryX=0.4;entryY=0;fillColor=#eeeeee;strokeColor=#36393d;" target="sql">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="subscription" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.15;exitY=1;entryX=0.5;entryY=0;fillColor=#eeeeee;strokeColor=#36393d;" target="cache">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="movie" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.3;exitY=1;entryX=0.7;entryY=0;fillColor=#eeeeee;strokeColor=#36393d;" target="sql">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" source="movie" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.1;exitY=1;entryX=0.9;entryY=0;fillColor=#eeeeee;strokeColor=#36393d;" target="cache">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="movie" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.6;exitY=1;entryX=0.5;entryY=0;fillColor=#eeeeee;strokeColor=#36393d;" target="cdn">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e16" edge="1" parent="1" source="payment" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0.3;exitY=1;entryX=1;entryY=0;fillColor=#eeeeee;strokeColor=#36393d;" target="sql">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e17" edge="1" parent="1" source="payment" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;fillColor=#eeeeee;strokeColor=#36393d;" target="paytm">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e18" edge="1" parent="1" source="cdn" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;strokeColor=#36393d;exitX=1;exitY=0.5;entryX=1;entryY=0.5;fillColor=#eeeeee;" target="client" value="video delivery">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1370" y="820" />
+              <mxPoint x="1370" y="50" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
